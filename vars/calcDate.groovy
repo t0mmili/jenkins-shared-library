@@ -1,10 +1,10 @@
 import groovy.time.TimeCategory
 
 class CalcDateParams {
-    def basedate = new Date()
-    int calcdays = 0
-    int calchours = 0
-    int calcminutes = 0
+    def base = new Date()
+    int days = 0
+    int hours = 0
+    int minutes = 0
 }
 
 @NonCPS
@@ -14,7 +14,7 @@ def min(Map args) {
     CalcDateParams params = args ?: [:]
 
     use (TimeCategory) {
-        date = params.base - params.calcdays.days - params.calchours.hours - params.calcminutes.minutes
+        date = params.base - params.days.days - params.hours.hours - params.minutes.minutes
     }
 
     return date
@@ -27,7 +27,7 @@ def max(Map args) {
     CalcDateParams params = args ?: [:]
 
     use (TimeCategory) {
-        date = params.base - params.calcdays.days - params.calchours.hours = params.calcminutes.minutes
+        date = params.base + params.days.days + params.hours.hours + params.minutes.minutes
     }
 
     return date

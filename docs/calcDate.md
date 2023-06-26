@@ -9,13 +9,13 @@ Method takes four arguments:
 
     Date and time that will be the basis for calculations.
     Defaults to current date and time.
- - **d**
+ - **days**
 
     Number of days to substract/add.
- - **h**
+ - **hours**
 
     Number of hours to substract/add.
- - **m**
+ - **minutes**
 
     Number of minutes to substract/add.
 
