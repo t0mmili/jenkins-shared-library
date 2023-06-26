@@ -1,5 +1,4 @@
 import groovy.time.TimeCategory
-import com.cloudbees.groovy.cps.NonCPS
 
 class CalcDateParams {
     def base = new Date()
@@ -21,7 +20,7 @@ def min(Map args) {
     return date
 }
 
-@NonCPSse
+@NonCPS
 def max(Map args) {
     def date = ''
 
