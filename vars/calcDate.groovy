@@ -1,4 +1,5 @@
 import groovy.time.TimeCategory
+import com.cloudbees.groovy.cps.NonCPS
 
 class CalcDateParams {
     def base = new Date()
