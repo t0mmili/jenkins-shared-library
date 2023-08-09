@@ -23,10 +23,10 @@ def call(Map args) {
         }
         else {
             httpRequest contentType: params.mime, outputFile: params.outfile, responseHandle: 'NONE', timeout: params.timeout, url: params.url , validResponseCodes: '100:599'
-            println "Successfuly downloaded file ${params.outfile}."
-            return
+    
+            return [exitcode: 0, message: "Successfuly downloaded file ${params.outfile}."]
         }
     }
 
-    error "Failed to download file ${params.url}."
+    return [exitcode: 1, message: "Failed to download file ${params.outfile}."]
 }
