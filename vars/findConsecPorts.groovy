@@ -1,5 +1,5 @@
 class FindConsecPortsParams {
-    int consecPorts = 5
+    int consecPorts = 3
     int endPort = 65535
     int startPort = 49152
     int timeout = 250
@@ -28,8 +28,8 @@ def call(Map args) {
             }
         }
 
-        if (testRes == params.consecPorts) return [ecode: 0, etext: currPort]
+        if (testRes == params.consecPorts) return [exitcode: 0, message: currPort]
 	}
 
-    return [ecode: 1, etext: "Consecutive ports set not found in range ${params.startPort}-${params.endPort}."]
+    return [exitcode: 1, message: "Consecutive ports set not found in range of ${params.startPort}-${params.endPort}."]
 }
