@@ -1,0 +1,79 @@
+currentBuild.rawBuild.project.description = 'Pipeline for Jenkins Shared Library unit testing'
+
+pipeline {
+  agent any
+  libraries {
+    lib 'jenkins-shared-library@feature/1-unit-tests'
+  }
+  options {
+    buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '5')
+    parallelsAlwaysFailFast()
+  }
+  stages {
+    stage('Unit tests') {
+      parallel {
+        stage('calcDate') {
+          agent {
+            docker {
+              label 'docker-agents'
+              image 'alpine'
+            }
+          }
+          steps {
+            script {
+              def minDate = calcDate.min(days: 1, hours: 2, minutes: 3)
+              echo "calcDate.min output: ${minDate}"
+              assert minDate.getHours() =~ /\d+/
+
+              def maxDate = calcDate.max(days: 1, hours: 2, minutes: 3)
+              echo "calcDate.max output: ${maxDate}"
+              assert maxDate.getHours() =~ /\d+/
+            }
+          }
+        }
+        stage('findConsecPorts') {
+          agent {
+            docker {
+              label 'docker-agents'
+              image 'alpine'
+            }
+          }
+          steps {
+            script {
+              def retOut = findConsecPorts(host: '127.0.0.1')
+
+              if(retOut.exitcode == 0) {
+                echo "findConsecPorts output: ${retOut.message}"
+                assert retOut.message =~ /\d+/
+              }
+              else if(retOut.exitcode == 1) {
+                error retOut.message
+              }
+            }
+          }
+        }
+        stage('httpDownload') {
+          agent {
+            docker {
+              label 'docker-agents'
+              image 'alpine'
+            }
+          }
+          steps {
+            script {
+              def retOut = httpDownload(outfile: 'testfile.pdf', url: 'https://link.testfile.org/PDF10MB')
+
+              if(retOut.exitcode == 0) {
+                echo "httpDownload output: ${retOut.message}"
+                assert retOut.message =~ /Successfuly downloaded file testfile\.pdf/
+              }
+              else if(retOut.exitcode == 1) {
+                error retOut.message
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
