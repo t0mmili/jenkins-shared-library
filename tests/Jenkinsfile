@@ -3,7 +3,7 @@ currentBuild.rawBuild.project.description = 'Pipeline for Jenkins Shared Library
 pipeline {
   agent any
   libraries {
-    lib 'jenkins-shared-library@feature/1-unit-tests'
+    lib 'jenkins-shared-library'
   }
   options {
     buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '5')
