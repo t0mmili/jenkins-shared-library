@@ -1,6 +1,6 @@
-`calcDate.min(def base = new Date(), def d, def h, def m)`
+`calcDate.min(Map args)`
 
-`calcDate.max(def base = new Date(), def d, def h, def m)`
+`calcDate.max(Map args)`
 
 Calculates the min or max date from the given base.
 
@@ -9,13 +9,13 @@ Method takes four arguments:
 
     Date and time that will be the basis for calculations.
     Defaults to current date and time.
- - **d**
+ - **days**
 
     Number of days to substract/add.
- - **h**
+ - **hours**
 
     Number of hours to substract/add.
- - **m**
+ - **minutes**
 
     Number of minutes to substract/add.
 

@@ -21,10 +21,10 @@ Method takes five arguments:
    A zero timeout is inferred as an infinite timeout. Defaults to 250 ms.
 
 Method returns a map with two keys:
- - **ecode**
+ - **exitcode**
 
    0 - success, 1 - error
- - **etext**
+ - **message**
 
    In case of success returns starting port as integer.  
    In case of error returns error message.

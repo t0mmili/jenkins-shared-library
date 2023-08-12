@@ -1,5 +1,7 @@
 `httpDownload(Map args)`
 
+> Requires **HTTP Request Plugin**.
+
 Downloads file from url.
 
 Method takes eight arguments:
@@ -31,4 +33,10 @@ Method takes eight arguments:
 
     File url to download.
 
-Method returns no value. If download fail, sends error signal and abort job execution.
+Method returns a map with two keys:
+ - **exitcode**
+
+   0 - success, 1 - error
+ - **message**
+
+   Information whether file download was successful.

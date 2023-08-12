@@ -16,7 +16,7 @@ def call(Map args) {
 
     VerifyChangesParams params = args ?: [:]
 
-    def minDate = calcDate.min(params.days, params.hours, params.min)
+    def minDate = calcDate.min(days: params.days, hours: params.hours, minutes: params.min)
 
     def scriptCommit = "@echo off | git log -1 --date=format:\"%%Y-%%m-%%d %%H:%%M:%%S\" --format=\"%%cd %%H %%ae\" origin/${params.branch} -- ${params.dir}"
 
@@ -32,7 +32,7 @@ def call(Map args) {
         def outSplit = retOut.split()
         commitDate = Date.parse('yyyy-MM-dd HH:mm:ss', "${outSplit[0]} ${outSplit[1]}")
         commitHash = outSplit[2]
-        commitAuthor = (outSplit.size() == 4 && outSplit[3].contains('@sente.pl')) ? outSplit[3] : params.author
+        commitAuthor = outSplit.size() == 4 ? outSplit[3] : params.author
 
         if (params.debug) {
             echo "[DEBUG] [verifyChanges] commitDate: ${commitDate}"
